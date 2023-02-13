@@ -23,10 +23,16 @@ public class Program
 
         string topic = appConfig["kafka:topic"];
         string bootstrapServers = appConfig["kafka:bootstrap-server"];
+        string saslUsername = appConfig["kafka:sasl-username"];
+        string saslPassword = appConfig["kafka:sasl-password"];
 
         ProducerConfig producerConfig = new ProducerConfig
         {
-            BootstrapServers = bootstrapServers
+            BootstrapServers = bootstrapServers,
+            SecurityProtocol = SecurityProtocol.SaslSsl,
+            SaslMechanism = SaslMechanism.Plain,
+            SaslUsername = saslUsername,
+            SaslPassword = saslPassword
         };
 
         try
